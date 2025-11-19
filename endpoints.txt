@@ -1,0 +1,10 @@
+*** user
+GET /status
+GET /logs
+GET /me
+
+
+*** admin
+GET /classified-archives
+GET /vaults
+GET /me
