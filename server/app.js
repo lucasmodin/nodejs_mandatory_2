@@ -22,7 +22,7 @@ const rateLimiter = rateLimit({
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    limit: 3,
+    limit: 100,
     standardHeaders: false,
     legacyHeaders: false
 });
@@ -47,12 +47,13 @@ app.use(session({
 // *************** routes
 
 app.use("/auth", authRouter);
-app.use(apiRouter);
+app.use("/api", apiRouter);
 
+/*
 app.get("/{*splat}", (req, res) => {
     res.send({ data: "Route not found. The Machine spirit does not recognize this path."})
 })
-
+*/
 
 
 
