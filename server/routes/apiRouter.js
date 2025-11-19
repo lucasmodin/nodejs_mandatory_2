@@ -24,16 +24,6 @@ router.get("/logs", isUser, (req, res) => {
     });
 });
 
-router.get("/me", isUser, (req, res) => {
-    res.send({
-        data: {
-            user: req.user.username,
-            role: req.user.role,
-            blessing: "May your circuits remain pure"
-        }
-    });
-});
-
 router.get("/classified-archives", isAdmin, (req, res) => {
     res.send({
         data: {

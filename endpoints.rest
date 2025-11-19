@@ -1,1 +1,11 @@
-GET http://localhost:9090/logs
+GET http://localhost:8080/api/logs
+
+###
+
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "username": "Titus",
+    "password": "1234"
+}
