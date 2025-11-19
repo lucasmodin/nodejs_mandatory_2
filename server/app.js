@@ -1,9 +1,33 @@
 import express from 'express';
 import session from 'express-session';
 import 'dotenv/config';
+import authRouter from './routes/authRouter.js';
+import { rateLimit } from 'express-rate-limit';
+import helmet from 'helmet';
+
+// *************** util, limit and session setup
 
 const app = express();
+app.use(express.json());
+app.use(helmet());
 
+const rateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 100,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    ipv6Subnet: 56,
+});
+
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 3,
+    standardHeaders: false,
+    legacyHeaders: false
+});
+
+app.use(rateLimiter);
+app.use("/auth", authLimiter);
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
@@ -19,8 +43,18 @@ app.use(session({
     cookie: { secure: false }
 }));
 
+// *************** routes
 
-const PORT = Number(process.env.PORT) ||8080;
+app.use("/auth", authRouter);
+
+app.get("/{*splat}", (req, res) => {
+    res.send({ data: "Route not found. The Machine spirit does not recognize this path."})
+})
+
+
+
+
+const PORT = Number(process.env.PORT) || 8080;
 
 app.listen(PORT, () => {
     console.log("Server running on port: ", PORT);
