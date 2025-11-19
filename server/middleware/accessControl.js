@@ -1,15 +1,20 @@
 import { Roles } from '../constants/roles.js';
 
-const simulatedUser = {
-    username: "Titus",
-    role: Roles.ADMIN
-}
+
 
 export function isUser(req, res, next) {
-    const userRole = simulatedUser.role;
+    const sessionUser = req.session.user;
 
-    if (userRole === Roles.USER || userRole === Roles.ADMIN) {
-        req.user = simulatedUser;
+    if (!sessionUser) {
+        return res.status(401).send({
+            data: {
+                error: "UNAUTHORIZED: No active session detected. Flesh lacks authorization."
+            }
+        });
+    }
+
+    if (sessionUser.role === Roles.USER || sessionUser.role === Roles.ADMIN) {
+        req.user = sessionUser;
         return next();
     }
 
@@ -21,10 +26,18 @@ export function isUser(req, res, next) {
 }
 
 export function isAdmin(req, res, next) {
-    const userRole = simulatedUser.role;
+    const sessionUser = req.session.user;
 
-    if (userRole === Roles.ADMIN) {
-        req.user = simulatedUser;
+    if (!sessionUser) {
+        return res.status(401).send({
+            data: {
+                error: "UNAUTHORIZED: No active session detected. Flesh lacks authorization."
+            }
+        });
+    }
+
+    if (sessionUser.role === Roles.ADMIN) {
+        req.user = sessionUser
         return next();
     }
 

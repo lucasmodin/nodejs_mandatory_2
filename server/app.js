@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import 'dotenv/config';
 import authRouter from './routes/authRouter.js';
+import apiRouter from "./routes/apiRouter.js";
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 
@@ -46,6 +47,7 @@ app.use(session({
 // *************** routes
 
 app.use("/auth", authRouter);
+app.use(apiRouter);
 
 app.get("/{*splat}", (req, res) => {
     res.send({ data: "Route not found. The Machine spirit does not recognize this path."})

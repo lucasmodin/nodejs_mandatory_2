@@ -1,57 +1,60 @@
 import { Router } from 'express';
-import { isUser, isAdmin } from '../middleware/accessControl.js';
+import bcrypt from 'bcryptjs';
+import { users } from '../data/users.js';
+import { isUser } from '../middleware/accessControl.js';
 
 const router = Router();
 
-router.get("/status", isUser, (req, res) => {
-    res.send({
+router.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+
+    const user = users.find(user => user.username === username);
+
+    if (!user) {
+        return res.status(401).send({
+            error: "ACCESS DENIED: No matching genetic imprint found."
+        });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+
+    if (!isPasswordValid) {
+        return res.status(401).send({
+            error: "ACCESS DENIED: Flesh authentication failed"
+        });
+    }
+
+    req.session.user = {
+        id: user.id,
+        username: user.username,
+        role: user.role
+    };
+
+    return res.send({
         data: {
-            status: "OPERATIONAL",
-            machineSpirit: "CALM",
-            message: "Machine Spirit hums in approval"
+            message: "Login successful. The Omnissiah recognizes your presence",
+            user: req.session.user
         }
     });
 });
 
-router.get("/logs", isUser, (req, res) => {
-    res.send({
-        data: {
-            logs: [
-                "Authentication cogitators synced.",
-                "No heretical code fragments detected"
-            ]
-        }
+router.post("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.send({
+            data: "You have been logged out. Machine Spirit slumbers"
+        });
     });
 });
 
 router.get("/me", isUser, (req, res) => {
     res.send({
         data: {
-            user: req.user.username,
-            role: req.user.role,
-            blessing: "May your circuits remain pure"
-        }
-    });
-});
-
-router.get("/classified-archives", isAdmin, (req, res) => {
-    res.send({
-        data: {
-            archiveLevel: "ALPHA-PRIME",
-            content: "+++ CLASSIFIED +++ Forbidden STC fragments detected"
-        }
-    });
-});
-
-router.get("/vaults", isAdmin, (req, res) => {
-    res.send({
-        data: {
-            vaults: [
-                "Data-Vault Sigma-7: Secure",
-                "Reliquary Vault Omicron-3: Under seal"
-            ]
+            id: req.user.id,
+            username: req.user.username,
+            role: req.user.role
         }
     });
 });
 
 export default router;
+
