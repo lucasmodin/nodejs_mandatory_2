@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
-import { users } from '../data/users.js';
+import db from '../database/connection.js';
 import { isUser } from '../middleware/accessControl.js';
 
 const router = Router();
@@ -8,7 +8,10 @@ const router = Router();
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
-    const user = users.find(user => user.username === username);
+    //sqlite docs says db.get for a single row
+    const user = await db.get(
+        'SELECT * FROM users WHERE username = ?;', username    
+    );
 
     if (!user) {
         return res.status(401).send({
@@ -16,7 +19,7 @@ router.post("/login", async (req, res) => {
         });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
     if (!isPasswordValid) {
         return res.status(401).send({
@@ -39,6 +42,13 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
+
+    if (!req.session.user) {
+        res.status(401).send({
+            error: "UNAUTHORIZED: No active session to destroy"
+        });
+    }
+
     req.session.destroy(() => {
         res.send({
             data: "You have been logged out. Machine Spirit slumbers"

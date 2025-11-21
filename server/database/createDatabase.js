@@ -1,4 +1,5 @@
 import db from './connection.js';
+import bcrypt from 'bcryptjs';
 
 const deleteMode = process.argv.includes('delete');
 
@@ -15,11 +16,29 @@ CREATE TABLE IF NOT EXISTS users (
 );    
 `);
 
-
+// seeding
 if (deleteMode) {
 
-    const 
+    const admin = {
+        username: "Titus",
+        password: "fleshbad",
+        role: "ADMIN"
+    }
+
+    const adminPasswordHash = await bcrypt.hash(admin.password, 12);
+
+    const user = {
+        username: "Servitor",
+        password: "fleshbad",
+        role: "USER"
+    }
+
+    const userPasswordHash = await bcrypt.hash(user.password, 12);
 
 
-    db.run(`INSERT INTO users (username, password_hash, role) VALUES ()`)
+    db.run(`INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)`,
+        admin.username, adminPasswordHash, admin.role);
+    
+    db.run(`INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)`,
+        user.username, userPasswordHash, user.role);       
 }
