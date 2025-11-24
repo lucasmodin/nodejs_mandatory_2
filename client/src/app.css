@@ -148,3 +148,28 @@ nav button:hover {
     background: #001a00;
 }
 
+/* Slight green/red chromatic aberration */
+.crt-aberration {
+    position: relative;
+}
+
+.crt-aberration::before,
+.crt-aberration::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.crt-aberration::before {
+    color: rgba(0, 255, 0, 0.4);
+    transform: translate(1px, 0);
+}
+
+.crt-aberration::after {
+    color: rgba(255, 0, 0, 0.4);
+    transform: translate(-1px, 0);
+}
+
+

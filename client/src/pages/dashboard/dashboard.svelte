@@ -4,7 +4,7 @@
     import { session } from "../../stores/sessionStore.js";
 
     let me = null;
-    let consoleOutput = "";
+    let consoleOutput = "The Machine Spirit is awaiting...";
 
     function formatOutput(data) {
         if (!data) return "> No data recieved";
@@ -57,7 +57,9 @@
 
 {#if me} 
 <div class="terminal-box dashboard-box">
-    <h1>OMNISSIAH ACCESS PANEL</h1>
+    <h1 class="crt-aberration" data-text="OMNISSIAH ACCESS PANEL">
+        OMNISSIAH ACCESS PANEL
+    </h1>
 
     <div>
         <p><strong>User:</strong> {me.username}</p>
@@ -93,6 +95,10 @@
     box-shadow: var(--crt-glow);
     line-height: 1.4rem;
     animation: crtFlicker 0.15s infinite;
+    overflow: hidden;
+    white-space: pre-wrap;
+    border-right: 2px solid var(--crt-green);
+    animation: typing 1.2s steps(40), cursorBlink .8s infinite step-end alternate;
 }
 
 .dashboard-box {
@@ -100,5 +106,9 @@
     margin: 40px auto;
 }
 
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
 
 </style>
