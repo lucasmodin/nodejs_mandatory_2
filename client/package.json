@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
+    "nodemailer": "^7.0.10",
     "toastify-js": "^1.12.0"
   }
 }
