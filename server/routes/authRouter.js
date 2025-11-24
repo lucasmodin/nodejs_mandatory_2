@@ -11,7 +11,7 @@ router.post("/login", async (req, res) => {
 
     //sqlite docs says db.get for a single row
     const user = await db.get(
-        'SELECT * FROM users WHERE username = ?;', username    
+        'SELECT * FROM users WHERE username = ? COLLATE NOCASE;', username    
     );
 
     if (!user) {
