@@ -3,26 +3,39 @@ import { fetchPost } from '../util/fetchUtil';
 
 let username = "";
 let password = "";
+let error = "";
+let loading = false;
 
-async function login() {
+async function login(event) {
+    event.preventDefault();
+    loading = true;
+
     const result = await fetchPost("/auth/login", {
         username,
         password
     });
 
     if (result.error) {
+        error = result.error;
         return;
     }
 }
 </script>
 
-<h1>Mechanicus Login</h1>
+<div class="terminal-box">
+    <h1>SERVO CRYPT LOGIN</h1>
 
-<form on:submit={login}>
+    <form on:submit={login}>
+        <label>Designation</label>
+        <input bind:value={username} required>
 
-    <input placeholder="Username" bind:value={username}>
-    <input type="password" placeholder="Password" bind:value={password}>
+        <label>Access Phrase</label>
+        <input type="password" bind:value={password} required>
 
-    <button type="submit">Login</button>
+        <button type="submit">Login</button>
+    </form>
 
-</form>
+    {#if error}
+        <div class="terminal-error">{error}</div>
+    {/if}
+</div>
