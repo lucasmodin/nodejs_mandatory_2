@@ -1,4 +1,4 @@
-import toastify from "toastify-js";
+import toastify from 'toastify-js';
 
 export function toastSuccess(message) {
     toastify({

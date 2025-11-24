@@ -1,5 +1,5 @@
 <script>
-    import LoginComponent from "../../components/LoginForm.svelte";
+    import LoginComponent from '../../components/LoginForm.svelte';
 </script>
 
 <div class="login-page">

@@ -1,11 +1,11 @@
 <script>
-    import { Router, Link, Route } from "svelte-routing";
-    import ProtectedRoutes from "./components/ProtectedRoutes.svelte";
+    import { Router, Link, Route } from 'svelte-routing';
+    import ProtectedRoutes from './components/ProtectedRoutes.svelte';
     import { session } from './stores/sessionStore.js';
     import { logout } from './services/authService';
 
     import Login from './pages/login/login.svelte';
-    import Dashboard from "./pages/dashboard/dashboard.svelte";
+    import Dashboard from './pages/dashboard/dashboard.svelte';
 
 </script>
 

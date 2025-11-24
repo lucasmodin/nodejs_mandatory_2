@@ -1,8 +1,8 @@
 <script>
-    import { onMount } from "svelte";
-    import { navigate } from "svelte-routing";
-    import { fetchGet } from "../util/fetchUtil";
-    import { session } from "../stores/sessionStore.js"
+    import { onMount } from 'svelte';
+    import { navigate } from 'svelte-routing';
+    import { fetchGet } from '../util/fetchUtil';
+    import { session } from '../stores/sessionStore.js'
 
     export let component;
 

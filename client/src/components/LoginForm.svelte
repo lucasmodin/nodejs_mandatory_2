@@ -1,8 +1,8 @@
 <script>
 import { login } from '../services/authService'
 import { toastSuccess, toastError } from '../services/toastService';
-import { session } from "../stores/sessionStore.js";
-import { navigate } from "svelte-routing";
+import { session } from '../stores/sessionStore.js';
+import { navigate } from 'svelte-routing';
 
 let username = "";
 let password = "";

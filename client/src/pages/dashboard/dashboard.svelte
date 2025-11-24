@@ -1,7 +1,7 @@
 <script>
-    import { onMount } from "svelte";
-    import { fetchGet } from "../../util/fetchUtil.js";
-    import { session } from "../../stores/sessionStore.js";
+    import { onMount } from 'svelte';
+    import { fetchGet } from '../../util/fetchUtil.js';
+    import { session } from '../../stores/sessionStore.js';
 
     let me = null;
     let consoleOutput = "The Machine Spirit is awaiting...";

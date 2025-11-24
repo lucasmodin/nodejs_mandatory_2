@@ -1,6 +1,6 @@
-import { fetchPost } from "../util/fetchUtil";
-import { session } from "../stores/sessionStore";
-import { navigate } from "svelte-routing";
+import { fetchPost } from '../util/fetchUtil';
+import { session } from '../stores/sessionStore';
+import { navigate } from 'svelte-routing';
 
 
 export async function login(username, password) {
