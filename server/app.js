@@ -50,7 +50,7 @@ app.use("/auth", authRouter);
 app.use("/api", apiRouter);
 
 app.get("/{*splat}", (req, res) => {
-    res.send({ data: "Route not found. The Machine spirit does not recognize this path."})
+    res.status(404).send({ data: "Route not found. The Machine spirit does not recognize this path."})
 })
 
 const PORT = Number(process.env.PORT) || 8080;

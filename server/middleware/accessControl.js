@@ -7,9 +7,7 @@ export function isUser(req, res, next) {
 
     if (!sessionUser) {
         return res.status(401).send({
-            data: {
-                error: "UNAUTHORIZED: No active session detected. Flesh lacks authorization."
-            }
+            error: "UNAUTHORIZED: No active session detected. Flesh lacks authorization."
         });
     }
 
@@ -30,9 +28,7 @@ export function isAdmin(req, res, next) {
 
     if (!sessionUser) {
         return res.status(401).send({
-            data: {
-                error: "UNAUTHORIZED: No active session detected. Flesh lacks authorization."
-            }
+            error: "UNAUTHORIZED: No active session detected. Flesh lacks authorization."
         });
     }
 

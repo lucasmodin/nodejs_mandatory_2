@@ -44,12 +44,13 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
 
     if (!req.session.user) {
-        res.status(401).send({
+        return res.status(401).send({
             error: "UNAUTHORIZED: No active session to destroy"
         });
     }
 
     req.session.destroy(() => {
+        res.clearCookie("connect.sid");
         res.send({
             data: "You have been logged out. Machine Spirit slumbers"
         });

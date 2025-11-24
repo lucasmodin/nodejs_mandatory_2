@@ -96,3 +96,18 @@ button:hover {
     text-shadow: 0 0 12px red;
 }
 
+nav button {
+    margin-left: 1rem;
+    border: var(--crt-border);
+    background: black;
+    color: var(--crt-green);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-shadow: var(--crt-glow);
+}
+
+nav button:hover {
+    background: #003300;
+    box-shadow: var(--crt-glow);
+}
+
