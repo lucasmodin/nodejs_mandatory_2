@@ -111,3 +111,40 @@ nav button:hover {
     box-shadow: var(--crt-glow);
 }
 
+/* Terminal Navigation Bar */
+.terminal-nav {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: #000a00;
+    border-bottom: 1px solid #00ff66aa;
+    box-shadow: 0 0 12px #00ff6699;
+    align-items: center;
+    font-family: var(--crt-font);
+}
+
+.terminal-nav a {
+    color: var(--crt-green);
+    text-decoration: none;
+    font-size: 1.1rem;
+    text-shadow: var(--crt-glow);
+}
+
+.terminal-nav a:hover {
+    text-shadow: 0 0 12px #00ff88;
+}
+
+.logout-btn {
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    background: black;
+    color: var(--crt-green);
+    border: var(--crt-border);
+    text-shadow: var(--crt-glow);
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #001a00;
+}
+

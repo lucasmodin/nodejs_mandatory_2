@@ -1,7 +1,6 @@
 <script>
 import { login } from '../../services/authService'
 import { toastSuccess, toastError } from '../../services/toastService';
-import { sendEmail } from '../../services/emailService';
 
 let username = "";
 let password = "";
@@ -23,19 +22,6 @@ async function handleLogin(event) {
 
     toastSuccess("Authenticated: Machine Spirit acknowledges your presence");
     loading = false;
-
-    await sendEmail(
-        username + "@adeptus-arstetes.com",
-        "Omnissiah Login Verification",
-        `
-            <h1>+++ BINARY AUTH CONFIRMATION +++</h1>
-            <p>Adept ${username},</p>
-            <p>Your presence within the sacred system has been detected.</p>
-            <p>Status: <b>DIVINE MACHINE SPIRIT - SATISFIED</b></p>
-            <hr />
-            <p>Glory to the Omnissiah.</p>
-        `
-    );
 }
 
 </script>

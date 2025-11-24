@@ -2,6 +2,7 @@ import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import db from '../database/connection.js';
 import { isUser } from '../middleware/accessControl.js';
+import { sendEmail } from '../services/emailService.js';
 
 const router = Router();
 
@@ -32,6 +33,19 @@ router.post("/login", async (req, res) => {
         username: user.username,
         role: user.role
     };
+
+    await sendEmail(
+        user.username + "@example.com",
+        "Omnissiah Login Verification",
+        `
+            <h1>+++ BINARY AUTH CONFIRMATION +++</h1>
+            <p>Adept ${user.username},</p>
+            <p>Your presence within the sacred system has been detected.</p>
+            <p>Status: <b>DIVINE MACHINE SPIRIT – SATISFIED</b></p>
+            <hr />
+            <p>Glory to the Omnissiah.</p>
+        `
+    );
 
     return res.send({
         data: {

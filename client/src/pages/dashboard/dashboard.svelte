@@ -56,7 +56,7 @@
 </script>
 
 {#if me} 
-<div class="terminal-box">
+<div class="terminal-box dashboard-box">
     <h1>OMNISSIAH ACCESS PANEL</h1>
 
     <div>
@@ -81,7 +81,7 @@
 {/if}
 
 <style>
-    .terminal-output {
+.terminal-output {
     margin-top: 2rem;
     padding: 1rem 1.5rem;
     background: #000;
@@ -94,5 +94,11 @@
     line-height: 1.4rem;
     animation: crtFlicker 0.15s infinite;
 }
+
+.dashboard-box {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
 
 </style>

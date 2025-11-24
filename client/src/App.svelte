@@ -11,7 +11,7 @@
 
 <div class="crt-scanlines">
     <Router>
-        <nav>
+        <nav class="terminal-nav">
             <Link to="/">Home</Link>
 
             {#if $session}
