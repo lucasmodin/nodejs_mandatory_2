@@ -17,12 +17,15 @@ async function login(event) {
 
     if (result.error) {
         error = result.error;
+        loading = false;
         return;
     }
+
+    loading = false;
 }
 </script>
 
-<div class="terminal-box">
+<div class="terminal-box login-wrapper">
     <h1>SERVO CRYPT LOGIN</h1>
 
     <form on:submit={login}>
@@ -39,3 +42,22 @@ async function login(event) {
         <div class="terminal-error">{error}</div>
     {/if}
 </div>
+
+<style>
+    .login-wrapper {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 2rem;
+}
+
+.login-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+</style>
