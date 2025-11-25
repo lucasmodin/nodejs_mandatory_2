@@ -48,6 +48,17 @@ npm i
 npm run dev
 ```
 
+Make a .env file in the `server` directory:
+```bash
+PORT=8080
+SESSION_SECRET=supersecretkey
+```
+
+Likewise, make one in the `client` directory:
+```bash
+VITE_BASE_URL=http://localhost:8080
+```
+
 To login on the site, use one of the test users below:
 
 | Username   | Password  | Role  |
